@@ -1,3 +1,49 @@
+<?php 
+
+	session_start();
+
+	$titulo_error='';
+	
+	$error['email']='';	
+	$error['password']='';
+	$error['nombre']='';
+	$error['apellido']='';
+	$error['sexo']='';
+	$error['fechanac']='';
+	$error['direccion']='';
+	$error['codpostal']='';
+	$error['localidad']='';
+	$error['provincia']='';
+
+	$input_value['email']='';
+	$input_value['password']='';
+	$input_value['nombre']='';
+	$input_value['apellido']='';
+	$input_value['sexo']='';
+	$input_value['fechanac']='';
+	$input_value['direccion']='';
+	$input_value['codpostal']='';
+	$input_value['localidad']='';
+	$input_value['provincia']='';
+	
+
+	if (isset($_SESSION['titulo_error'])) {
+		$titulo_error=$_SESSION['titulo_error'];
+	}
+
+	if (isset($_SESSION['mensajes_error'])) {
+		$error=$_SESSION['mensajes_error'];	
+	}
+
+	if (isset($_SESSION['cliente'])) {
+		$input_value=$_SESSION['cliente'];
+	}
+
+	$_SESSION = array();
+
+?>
+
+
 <!DOCTYPE html>
 <html>
 
@@ -16,65 +62,120 @@
 			include "header.php";
 		?>
 
+
 		<div class=container-formulario>
 
-			<h1>Crear cuenta</h1>
 		
+			<h1>Crear cuenta</h1>
 
-			<div class=sign-in-container>			
+			<div class=crear-cliente-container>	
+				
+				<?php 
+				  	if (!($titulo_error=='')) {
+				  		echo "<div class='mensaje-error'>
+				  		 		  <h3>$titulo_error</h3>
+							  </div>";
+				  	}			
+				?>		
 
 				<div class="crear-cliente">
-					
+							
 					<h2>Nuevo cliente</h2>
 
-					<form action="pagina.php" method="post">
 
-						<label for="usuario">Usuario </label> 	
-						<input id="usuario" type="text" name="usuario" value="" required > 
-						<br> <br>
+					<form class="form-alta" action="cliente_controller.php" method="post" 					
+						  enctype="multipart/form-data">
 
 						<label for="email">Email </label> 	
-						<input id="email" type="e-mail" name="correo_electronico" value="" required > 
+						<?php 
+							echo "<input id='email' type='e-mail' name='correo_electronico' 
+							       value='".$input_value['email']."'' required /> ";
+						?>
+						<span class='error'><?php echo($error['email']); ?></span>
 						<br> <br>
 						
 						<label for="password">Password </label> 
-						<input id="password" type="password" name="password" value="" required  maxlength="20">  
-
+						<input id="password" type="password" name="password" value=""  maxlength="20">
+						
 						<label for="password2" >Confirmar </label>
-		                <input id="password2" type="password" name="password2" value="" required maxlength="20">
-		                <br> <br>              
+		                <input id="password2" type="password" name="password2" value=""  maxlength="20">
+		                <br>  
+		                <span class='error'><?php echo($error['password']); ?></span>
+		                <br>             
 		             
 						<label for="nombre">Nombre </label>		
-						<input id="nombre" type="text" name="nombre" value="" required> <br> <br>
+						<?php 
+							echo "<input id='nombre' type='text' name='nombre' 
+								   value='".$input_value['nombre']."' required maxlength='20'>" 
+						?>
+						
+						<label for="apellido">Apellido </label>	
+						<?php 
+							echo "<input id='apellido' type='text' name='apellido' 
+								   value='".$input_value['apellido']."' required maxlength='30'>" 
+						?>	
+						<br>						
+						<span class='error'><?php echo($error['nombre'].'  '); ?></span>
+						<span class='error'><?php echo($error['apellido']); ?></span> 
+						<br>
 
-						<label for="fechanac">Fecha de Nacimiento </label>		
-						<input id="fechanac" type="date" name="fechanac" value="" required> <br> <br>
+						<label for="avatar">Imagen perfil </label>		
+						<input id="avatar" type="file" name="avatar" value="" > <br> <br>						
 
 						<label for="sexo">Sexo </label>		
 						<select name="sexo" >
 								<option value="femenino">Femenino</option>
 								<option value="masculino">Masculino</option>
 						</select>
-						<br> <br>
-
+						
+						<label for="fechanac">Fecha de Nacimiento </label>		
+						<?php 
+							echo "<input id='fechanac' type='date' name='fechanac' 
+								   value='".$input_value['fechanac']."' >" 
+						?>	
+						<br> 
+						<span class='error'><?php echo($error['sexo'].'  '); ?></span>
+						<span class='error'><?php echo($error['fechanac']); ?></span> 
+						<br>
 								
-						<label for="direccion">Dirección </label>  	
-						<input id="direccion" type="text" name="direccion" value="" required maxlength="50"> 
-					
-						<label for="codpostal">CP </label>  	
-						<input id="codpostal" type="text" name="codpostal" value="" required maxlength="4"> <br> <br>
+						<label for="direccion">Dirección</label>  	
+
+						<?php 
+							echo "<input id='direccion' type='text' name='direccion' 
+								   value='".$input_value['direccion']."' required maxlength='100'>" 
+						?>	
+						
+						<label for="codpostal">Codigo Postal </label> 
+						<?php 
+							echo "<input id='codpostal' type='text' name='codpostal' 
+								   value='".$input_value['codpostal']."' required maxlength='8'>" 
+						?>	
+						<br>
+						<span class='error'><?php echo($error['direccion'].'  '); ?></span>
+						<span class='error'><?php echo($error['codpostal']); ?></span> 
+						<br>
 
 						<label for="localidad">Localidad </label>  	
-						<input id="localidad" type="text" name="localidad" value="" required maxlength="50"> 
+						<?php 
+							echo "<input id='localidad' type='text' name='localidad' 
+								   value='".$input_value['localidad']."' required maxlength='50'>" 
+						?>	 
 
 						<label for="provincia">Provincia </label>  	
 						<select name="provincia" >
 								<option value="Capital Federal">Capital Federal</option>
 								<option value="Buenos Aires">Buenos Aires</option>
 						</select>
-						<br> <br>
+						<br>
+						<span class='error'><?php echo($error['localidad'].'  '); ?></span>
+						<span class='error'><?php echo($error['provincia']); ?></span> 
+						<br>
 						
-						<button type=”submit”>Crear cuenta</button> 
+						<div class='botones'>
+							<button name='cancelar' type=”submit”>Cancelar</button> 
+							<button name='registrar' type=”submit”>Crear cuenta</button>
+						</div> 
+
 					</form>
 
 				</div>
