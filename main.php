@@ -1,3 +1,9 @@
+<?php
+session_start();
+include "php/cookies.controller.php";
+//var_dump($_SESSION) ;echo"<br>";
+?>
+
 <!DOCTYPE html>
 <html>
 

@@ -83,12 +83,12 @@
 					<h2>Nuevo cliente</h2>
 
 
-					<form class="form-alta" action="cliente_controller.php" method="post" 					
+					<form class="form-alta" action="php/cliente.controller.php" method="post" 					
 						  enctype="multipart/form-data">
 
 						<label for="email">Email </label> 	
 						<?php 
-							echo "<input id='email' type='e-mail' name='correo_electronico' 
+							echo "<input id='email' type='e-mail' name='email' 
 							       value='".$input_value['email']."'' required /> ";
 						?>
 						<span class='error'><?php echo($error['email']); ?></span>
@@ -172,8 +172,8 @@
 						<br>
 						
 						<div class='botones'>
-							<button name='cancelar' type=”submit”>Cancelar</button> 
-							<button name='registrar' type=”submit”>Crear cuenta</button>
+							<!--<button name='reset' type='reset'>Reset</button> -->
+							<button name='registrar' type='submit'>Crear cuenta</button>
 						</div> 
 
 					</form>

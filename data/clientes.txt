@@ -1,3 +1,0 @@
-{"email":"anailg@fibertel.com.ar","password":"1234","nombre":"Ana","apellido":"Ibarlucia","sexo":"femenino","fechanac":"","direccion":"Ururguay 995","codpostal":"1015","localidad":"CABA","provincia":"Capital Federal","id":"59176d61e652f","avatar":""}
-{"email":"pepe@yahoo.com","password":"pepe345","nombre":"Pepe","apellido":"Perez","sexo":"masculino","fechanac":"","direccion":"santa fe 1234","codpostal":"1020","localidad":"CABA","provincia":"Capital Federal","id":"59176fe2ed6cd","avatar":""}
-{"email":"juan@yahoo.com","password":"juan123","nombre":"Juan","apellido":"Garcia","sexo":"masculino","fechanac":"","direccion":"santa fe 1234","codpostal":"1020","localidad":"CABA","provincia":"Capital Federal","id":"591770a7e35c3","avatar":""}

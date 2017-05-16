@@ -1,42 +1,42 @@
 <?php
-session_start();
+	session_start();
 
 
-if (isset($_POST['cancelar'])){
-	$_SESSION = array();
-	session_destroy($_SESSION);
-	header("Location:main.php");
-	exit; 
-}
-
-$_SESSION['titulo_err'] ='';
-$_SESSION['mensajes_error']=[];
-$_SESSION['cliente']=[];
-
-
-if (cliente_valido()) {
-
-	if (guardar_cliente()) {
-
-		/* ir a pagina de exito */
+	if (isset($_POST['cancelar'])){
 		$_SESSION = array();
 		session_destroy($_SESSION);
-		header("Location:exito_clientenuevo.php");
-		exit; 		
-	}
-	else { 
-		   $_SESSION['titulo_error'] =
-		   "Se produjo un error al guardar el registro, por favor intentelo nuevamente." ;			
+		header("Location:../main.php");
+		exit; 
 	}
 
-} else { 
-			$_SESSION['titulo_error']="Por favor revise los datos ingresados";
-			
-}
+	$_SESSION['titulo_err'] ='';
+	$_SESSION['mensajes_error']=[];
+	$_SESSION['cliente']=[];
 
-/* volver al formulario */
-header("Location:clientenuevo.php");
-exit;
+
+	if (cliente_valido()) {
+
+		if (guardar_cliente()) {
+
+			/* ir a pagina de exito */
+			$_SESSION = array();
+			session_destroy($_SESSION);
+			header("Location:../registroCliente_exito.php");
+			exit; 		
+		}
+		else { 
+			   $_SESSION['titulo_error'] =
+			   "Se produjo un error al guardar el registro, por favor intentelo nuevamente." ;			
+		}
+
+	} else { 
+				$_SESSION['titulo_error']="Por favor revise los datos ingresados";
+				
+	}
+
+	/* volver al formulario */
+	header("Location:../registroCliente.php");
+	exit;
 
 
 /* Inicializo el array de cliente */
@@ -101,7 +101,7 @@ function cliente_valido () {
 		$flag_ok = true;
 
 		/* --- Validaciones email ------*/
-		$arr_cliente['email']= trim($_POST['correo_electronico']);
+		$arr_cliente['email']= trim($_POST['email']);
 		
 		$email = filter_var($arr_cliente['email'], FILTER_VALIDATE_EMAIL);
 		
@@ -260,7 +260,7 @@ function guardar_cliente() {
     $cliente_json= json_encode($arr_cliente);
 
 
-	If (file_put_contents('./data/clientes.txt', $cliente_json . PHP_EOL , FILE_APPEND | LOCK_EX)){
+	If (file_put_contents('../data/clientes.txt', $cliente_json . PHP_EOL , FILE_APPEND | LOCK_EX)){
    	
 			return TRUE; /* vuelve con exito siempre que el registro se guarde en el archivo de clientes.*/
 		}
@@ -275,7 +275,7 @@ function guardar_cliente() {
 function existe_cliente($email){
 
 	
-	$gestor = fopen("./data/clientes.txt", "r");
+	$gestor = fopen("../data/clientes.txt", "r");
 
 	if ($gestor) { 
 		while (($registro = fgets($gestor)) !== false) {

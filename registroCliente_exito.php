@@ -1,3 +1,6 @@
+<?php 
+	session_start();
+?>
 <!DOCTYPE html>
 <html>
 
@@ -20,10 +23,10 @@
 		
 			<h2>Felicitaciones! se ha registrado con exito.</h2>
 
-			<form action="main.php" method="post" >
-				<button  type=”submit”>Continuar</button> 
-			</form>
-
+			<div class="btn_continuar">
+					<a href="main.php">Continuar</a> <br>
+			</div> 
+			
 		</div>
 
 		<?php

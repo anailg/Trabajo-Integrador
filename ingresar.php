@@ -1,3 +1,22 @@
+<?php 
+
+	session_start();
+
+	$error='';
+	$filter_email='';
+
+	if (isset($_SESSION['error_ingreso'])) {
+		$error=$_SESSION['error_ingreso'];
+		$_SESSION['error_ingreso'] = '';	
+	}
+
+	if (isset($_SESSION['filter_email'])) {
+		$filter_email=$_SESSION['filter_email'];
+		$_SESSION['filter_email'] = '';
+	}	
+
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -26,17 +45,23 @@
 
 				<h2>Ya soy cliente</h2>
 
-				<form action="pagina.php" method="post">
+				<form action="php/session.controller.php" method="post">
 				
-					<label for="email">Email</label>  <br>		
-					<input id="email" type="e-mail" name="correo_electronico" value="" required> <br> <br>
+					<label for="email">Email</label>  <br>	
+					<?php 
+						echo "<input id='email' type='e-mail' name='email' 
+						       value='".$filter_email."'' required /> ";
+					?> 
+					<span class='error'><?php echo($error); ?></span>
+					<br> <br>
 					
 					<label for="password">Password</label> <br>
-					<input type="password" name="contraseña" value="" required>  <br><br>
+					<input type="password" name="password" value="" required>  <br><br>
 
 					<a href="cambio-pswd.html">Olvidé mi password</a><br><br>
 
 					<button type=”submit”>Ingresar</button> <br>
+					<input type="checkbox" checked="checked" name="recordarme"> Recordarme					
 
 		  		</form>
 		  		
@@ -52,7 +77,7 @@
 				<p> Podés participar de sorteos</p>
 
 				<div class="btn_crearcliente">
-					<a href="clientenuevo.php">Crear cuenta</a> <br>
+					<a href="registroCliente.php">Crear cuenta</a> <br>
 				</div> 
 
 
